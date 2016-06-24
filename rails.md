@@ -120,7 +120,7 @@ end
 select order.datetime_from.year, :from => "order[datetime_from(1i)]"
 ```
 
-####Заполнение Input
+###Заполнение Input
 ```Ruby
   fill_in 'order[flight]', :with => order.flight
 ```
