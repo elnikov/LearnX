@@ -109,18 +109,18 @@ Capybara.configure do |config|    # Также необходимо добави
   config.save_path = "tmp/capybara_output" if Gem.win_platform?
 end
 ```
-
-##Проверка статус кода
+##DSL
+###Проверка статус кода
 ```Ruby
     expect(page.status_code).to eql(200)
 ```
 
-#Заполнение Select
+###Заполнение Select
 ```Ruby
 select order.datetime_from.year, :from => "order[datetime_from(1i)]"
 ```
 
-#Заполнение Input
+####Заполнение Input
 ```Ruby
   fill_in 'order[flight]', :with => order.flight
 ```
