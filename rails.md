@@ -3,6 +3,20 @@
 
 # Models
 
+#AutoSave
+Заменяеть процедуру сохранения нестед атрибута
+```Ruby
+belongs_to :client, :autosave => true
+
+private def autosave_associated_records_for_client
+    if new_client = Client.find_by_email(client.email)
+      self.client = new_client
+    else
+      self.client.save!
+end
+```
+
+
 ##Вложеные аттрибуты 
 https://github.com/alloy/complex-form-examples/tree/master/app/models
 https://github.com/plataformatec/simple_form/wiki/Nested-Models
