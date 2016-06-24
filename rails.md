@@ -110,3 +110,21 @@ Capybara.configure do |config|    # Также необходимо добави
 end
 ```
 
+##Проверка статус кода
+```Ruby
+    expect(page.status_code).to eql(200)
+```
+
+#Заполнение Select
+```Ruby
+select order.datetime_from.year, :from => "order[datetime_from(1i)]"
+```
+
+#Заполнение Input
+```Ruby
+  fill_in 'order[flight]', :with => order.flight
+```
+
+
+
+
