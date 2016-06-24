@@ -36,7 +36,7 @@ accepts_nested_attributes_for :tasks, :tags, :allow_destroy => true, :reject_if 
 ```Ruby
 validates :client, presence: true, on: :context_name
 
-Model.valid?(:context_name,e)
+Model.valid?(:context_name)
 Model.validate(:context_name)
 ```
 
