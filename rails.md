@@ -3,7 +3,28 @@
 
 # Models
 
-#AutoSave
+##Сброс валидации
+
+Можно скипать валидацию с условием.
+```Ruby
+	attr_accessor :skip_uniq_validation 
+	validates :email, uniqueness: true, unless: :skip_uniq_validation
+	#...............
+	@model.skip_uniq_validation=true
+	@model.save
+```
+Ещё с помощью **proc**
+```Ruby
+class Example < ActiveRecord::Base
+  has_one :foo
+  has_one :bar
+
+  validates_presence_of :foo
+  validates_presence_of :bar, :unless => Proc.new { |example| example.foo == Foo.find_by_name('ThisFooDoesntLikeBars') }
+end
+```
+
+##AutoSave
 Заменяеть процедуру сохранения нестед атрибута
 ```Ruby
 belongs_to :client, :autosave => true
@@ -54,5 +75,38 @@ rake
 
 ```Ruby
 ActiveRecord::Migration.maintain_test_schema!
+```
+
+##PhantomJS
+
+Подключения фантом для windows
+```Ruby
+if Gem.win_platform?
+  Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, :phantomjs => 'C:/phantomjs/2.1.1/bin/phantomjs.exe')
+  end
+end
+```
+
+##Capybara
+###Настройка капибары
+```Ruby
+require File.expand_path("../../config/environment", __FILE__)
+ENV["RAILS_ENV"] ||= 'test'
+require 'rubygems'
+require 'spork'
+require 'factory_girl_rails'
+require 'capybara/rspec'
+require 'capybara/rails'
+Capybara.configure do |config|    # Также необходимо добавить настройки для Capybara
+  config.run_server = true 
+  config.server_port = 7000
+  config.app_host = "http://127.0.0.1:#{config.server_port}" 
+  config.default_driver = :poltergeist
+  config.current_driver = :poltergeist
+  config.javascript_driver = :poltergeist
+  config.save_path = "/vagrant/ultaxi/tmp/capybara_output" unless Gem.win_platform?
+  config.save_path = "tmp/capybara_output" if Gem.win_platform?
+end
 ```
 
