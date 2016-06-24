@@ -13,6 +13,16 @@ https://github.com/plataformatec/simple_form/wiki/Nested-Models
 accepts_nested_attributes_for :tasks, :tags, :allow_destroy => true, :reject_if => proc { |a| a['name'].blank? }
 ```
 
+##Валидация
+###Контекст
+Есть один момент, валидация у которой есть контекст, по умолчанию выполняеться не будет.
+Если у валидации нет контекста, она выполниться в любом контекст
+```Ruby
+validates :client, presence: true, on: :context_name
+```
+Model.valid?(:context_na,e)
+Model.validate(:context_name)
+
 
 
 # Routing
