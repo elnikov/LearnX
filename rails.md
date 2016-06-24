@@ -48,3 +48,10 @@ Model.validate(:context_name)
 # Rake
 
 rake 
+
+# RSPEC
+
+```Ruby
+ActiveRecord::Migration.maintain_test_schema!
+```
+
