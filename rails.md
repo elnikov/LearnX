@@ -125,6 +125,13 @@ select order.datetime_from.year, :from => "order[datetime_from(1i)]"
   fill_in 'order[flight]', :with => order.flight
 ```
 
+###Проверка мета тегов
+```Ruby
+    desc_tag = "meta[name=\"description\"][content=\"#{country.desc}\"]"
+    keyw_tag = "meta[name=\"keywords\"][content=\"#{country.keywords}\"]"
 
+    expect(page.source).to have_css(desc_tag, visible: false)
+    expect(page.source).to have_css(keyw_tag, visible: false)
+```
 
 
